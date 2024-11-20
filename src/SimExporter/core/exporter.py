@@ -1,12 +1,14 @@
 from typing import List, Union
 from os import makedirs
 from os.path import join, dirname, exists
+import numpy as np
 from k3d import Plot
 from base64 import b64encode
 from zlib import compress
 from msgpack import packb
 
 from SimExporter.core.factory import Factory, convert_color
+from SimExporter.core.utils import bounding_box
 
 
 class Exporter:
@@ -38,7 +40,18 @@ class Exporter:
         :param pitch: Pitch to apply on the objects.
         """
 
-        self._plt.camera = self._plt.get_auto_camera(factor=factor, yaw=yaw, pitch=pitch)
+        # Compute bounds
+        boxes = []
+        for o in self._plt.objects:
+            try:
+                bbox = o.get_bounding_box()
+            except AttributeError:
+                bbox = bounding_box(o)
+            boxes.append(bbox)
+        boxes = np.stack(boxes)
+        bounds = np.dstack([np.min(boxes[:, 0::2], axis=0), np.max(boxes[:, 1::2], axis=0)]).flatten()
+
+        self._plt.camera = self._plt.get_auto_camera(factor=factor, yaw=yaw, pitch=pitch, bounds=bounds)
 
     def to_html(self,
                 filename: str,
