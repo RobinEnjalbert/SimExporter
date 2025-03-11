@@ -23,12 +23,6 @@ class Simulation(Sofa.Core.Controller):
         root.addObject('RequiredPlugin', pluginName=required_plugins)
         root.addObject('VisualStyle', displayFlags='showVisualModels showBehaviorModels showForceFields')
         root.addObject('DefaultAnimationLoop')
-        root.addObject('GenericConstraintSolver', maxIterations=10, tolerance=1e-3)
-        root.addObject('CollisionPipeline')
-        root.addObject('BruteForceBroadPhase')
-        root.addObject('BVHNarrowPhase')
-        root.addObject('DiscreteIntersection')
-        root.addObject('DefaultContactManager')
 
         # Create the logo object node
         root.addChild('logo')
@@ -56,7 +50,7 @@ if __name__ == '__main__':
     node.addObject(Simulation(root=node))
 
     # Init the SOFA simulation
-    Sofa.Simulation.init(node)
+    Sofa.Simulation.initRoot(node)
 
     # Launch the SOFA Gui, run a few time steps
     Sofa.Gui.GUIManager.Init(program_name="main", gui_name="qglviewer")

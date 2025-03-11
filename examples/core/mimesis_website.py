@@ -5,6 +5,7 @@ This script was used to generate the 3D interactive animation on the MIMESIS lan
 from os.path import join
 from numpy import load
 from vedo import Mesh
+import webbrowser
 
 from SimExporter.core import Exporter
 
@@ -39,3 +40,4 @@ exporter.objects.add_mesh(positions=vessel.vertices,
 exporter.set_camera(factor=0.8, yaw=-75, pitch=65)
 exporter.to_html(filename=join('html', 'website.html'), background_color="#030929", grid_visible=False,
                  menu_visible=False, frame_visible=False)
+webbrowser.open(join('html', 'website.html'))

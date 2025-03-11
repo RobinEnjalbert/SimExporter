@@ -2,6 +2,7 @@ from os.path import join
 from numpy import load, mean, tile
 from numpy.linalg import norm
 from vedo import Mesh
+import webbrowser
 
 from SimExporter.core import Exporter
 
@@ -70,3 +71,4 @@ exporter.objects.add_points(positions=heart.vertices,
 exporter.set_camera(factor=0.55, yaw=-90, pitch=60)
 exporter.to_html(filename=join('html', 'gallery.html'), background_color='#0D1117', grid_visible=False,
                  menu_visible=False, frame_visible=False)
+webbrowser.open(join('html', 'gallery.html'))
