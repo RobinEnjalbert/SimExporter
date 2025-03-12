@@ -100,6 +100,7 @@ class Factory:
                    color: Union[str, List] = 'salmon',
                    alpha: float = 1.,
                    point_size: int = 0.1,
+                   dot_shading: bool = False,
                    colormap_name: str = 'jet',
                    colormap_range: Optional[List[int]] = None,
                    colormap_values: Optional[ndarray] = None,
@@ -112,6 +113,7 @@ class Factory:
         :param color: Color of the points, either the 'color name' or the [R, G, B] values.
         :param alpha: Opacity of the points.
         :param point_size: Size of the points.
+        :param dot_shading: If True, the points are rendered as 2D dots.
         :param colormap_name: Color map scheme name, see
                               https://matplotlib.org/stable/users/explain/colors/colormaps.html#classes-of-colormaps.
         :param colormap_range: Range of the color map.
@@ -125,6 +127,7 @@ class Factory:
                             color=convert_color(color),
                             opacity=alpha,
                             point_size=point_size,
+                            dot_shading=dot_shading,
                             colormap_name=colormap_name,
                             colormap_range=colormap_range,
                             colormap_values=colormap_values,

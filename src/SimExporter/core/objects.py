@@ -76,6 +76,7 @@ def points(positions: ndarray,
            color: int,
            opacity: float,
            point_size: float,
+           dot_shading: bool,
            colormap_name: str,
            colormap_range: Optional[List[int]],
            colormap_values: Optional[ndarray],
@@ -87,6 +88,7 @@ def points(positions: ndarray,
     :param color: Color of the points.
     :param opacity: Opacity of the points.
     :param point_size: Size of the points.
+    :param dot_shading: Dot or spheres points.
     :param colormap_name: Color map scheme name.
     :param colormap_range: Color map range.
     :param colormap_values: Color map scalar values.
@@ -121,12 +123,16 @@ def points(positions: ndarray,
             else:
                 color_range += [colormap_values.min(), colormap_values.max()]
 
+    # Adapt shader
+    shader = 'dot' if dot_shading else '3D'
+    point_size = 20 * point_size if dot_shading else point_size
+
     # Actually create the k3d points
     return k3d.points(positions=positions,
                       color=color,
                       opacity=opacity,
                       point_size=point_size,
-                      shader='3D',
+                      shader=shader,
                       color_map=color_map,
                       attribute=color_attribute,
                       color_range=color_range)

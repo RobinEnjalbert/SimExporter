@@ -1,5 +1,6 @@
 from os.path import join
 import numpy as np
+import webbrowser
 
 import Sofa.Gui
 
@@ -38,7 +39,7 @@ if __name__ == '__main__':
                                      colormap_function=displacement_field)
 
     # Init the SOFA simulation AFTER creating the exporter (otherwise, callbacks will not work)
-    Sofa.Simulation.init(node)
+    Sofa.Simulation.initRoot(node)
 
     # Launch the SOFA Gui, run a few time steps
     Sofa.Gui.GUIManager.Init(program_name="main", gui_name="qglviewer")
@@ -51,3 +52,4 @@ if __name__ == '__main__':
     exporter.set_camera(factor=0.8, yaw=0, pitch=0)
     exporter.to_html(filename=join('html', 'sofa.html'), background_color='black', grid_visible=False,
                      menu_visible=True, frame_visible=True)
+    webbrowser.open(join('html', 'sofa.html'))

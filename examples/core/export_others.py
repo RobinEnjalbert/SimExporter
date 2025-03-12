@@ -2,6 +2,7 @@ from os.path import join
 from numpy import array, float32
 import k3d
 from vedo import Mesh
+import webbrowser
 
 from SimExporter.core import Exporter
 
@@ -31,3 +32,4 @@ exporter.objects.add_k3d_objects(lines, text)
 
 # Export to HTML
 exporter.to_html(filename=join('html', 'others.html'))
+webbrowser.open(join('html', 'others.html'))

@@ -1,6 +1,7 @@
 from os.path import join
 from numpy import load, zeros, mean, array
 from vedo import Mesh
+import webbrowser
 
 from SimExporter.core import Exporter
 
@@ -34,3 +35,4 @@ exporter.objects.add_arrows(positions=mean(heart_positions, axis=0),
 exporter.set_camera(factor=0.8, yaw=-80, pitch=60)
 exporter.to_html(filename=join('html', 'arrows.html'), background_color='#0D1117', grid_visible=False,
                  menu_visible=True, frame_visible=False)
+webbrowser.open(join('html', 'arrows.html'))
